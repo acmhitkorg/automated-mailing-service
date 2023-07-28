@@ -12,7 +12,7 @@
 
   - **Method:** GET
   - **Summary:** Get information about the API.
-  - **Description:** Provides an overview of the API, its purpose, and the available endpoints.
+  - **Description:** Provides an overview of the API and its purpose.
 
 - **GET /recipient_list:**
 
