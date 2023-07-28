@@ -1,6 +1,6 @@
 class configuration:
     MONGO_URI = "mongodb://localhost:27017/"
-    DB = "demo"
-    COLLECTION = "email_list"
-    EMAIL_SENDER = 'forestwatchai@gmail.com'
-    APP_PASSWORD = 'ukjesipihjzwijch'
+    DB = "put your database name here"
+    COLLECTION = "put your collection name here"
+    EMAIL_SENDER = 'johndoe@gmail.com'
+    APP_PASSWORD = 'put your app password here'

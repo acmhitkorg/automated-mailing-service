@@ -1,3 +1,4 @@
+import json
 from fastapi import FastAPI, HTTPException, status
 from email.message import EmailMessage
 from pymongo import MongoClient
@@ -34,47 +35,7 @@ def get_api_info():
     return {
         "title": "Email Service API",
         "description": "This API allows you to manage email recipients and send emails to those recipients using a MongoDB database and a Gmail SMTP server.",
-        "endpoints": [
-            {
-                "url": "/",
-                "method": "GET",
-                "summary": "Get information about the API.",
-                "description": "Provides an overview of the API, its purpose, and the available endpoints.",
-            },
-            {
-                "url": "/recipient_list",
-                "method": "GET",
-                "summary": "Get a list of email addresses of recipients.",
-                "description": "Retrieves a list of email addresses from the MongoDB collection.",
-                "response": ["email1@example.com", "email2@example.com", "..."]
-            },
-            {
-                "url": "/push_new_recipient",
-                "method": "POST",
-                "summary": "Add a new recipient.",
-                "description": "Adds a new recipient to the MongoDB collection.",
-                "request": {
-                    "name": "John Doe",
-                    "email": "johndoe@example.com"
-                },
-                "response": {
-                    "message": "Data inserted successfully"
-                }
-            },
-            {
-                "url": "/send_mail",
-                "method": "POST",
-                "summary": "Send an email.",
-                "description": "Sends an email to all recipients in the MongoDB collection.",
-                "request": {
-                    "subject": "sample subject",
-                    "body": "sample body"
-                },
-                "response": {
-                    "status": "mail sent successfully"
-                }
-            }
-        ]
+        "status": "working"
     }
 
 
