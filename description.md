@@ -32,21 +32,21 @@ Content-Type: application/json
   "to": "recipient1@example.com,recipient2@example.com",// From your MongoDB Database automatically
   "subject": "Greetings",
   "text": "Hello, this is a test email.",
-  "imagePath": "Enter the image file name from the same directory in which directory your .js files have"
+  "imagePath": "example-image.jpg" // Put the image file in the same directory as your .js files
 }
 
 **Example Response (Success):**
 - **Status Code:** 200
 - **Response Body:**
 {
-"message": "Email sent successfully"
+  "message": "Email sent successfully"
 }
 
 **Example Response (Error):**
 - **Status Code:** 500
 - **Response Body:**
 {
-"error": "Failed to send email"
+  "error": "Failed to send email"
 }
 
 ## How It Works:
@@ -69,20 +69,15 @@ Content-Type: application/json
 
 9. The MongoDB connection is closed after the operation is complete.
 
-**Notes:**
+## Configuration:
 
-1. Ensure that the MongoDB URI provided in the code is valid and points to a database with the appropriate "Your_collection_name" collection containing recipient data.
+1. Ensure that the MongoDB URI provided in the code is valid and points to a database with the appropriate collection containing recipient data. Replace 'Your_collection_name' with the actual name of the collection.
 
-2. Make sure to use a valid Gmail account with the correct credentials to authenticate with Nodemailer.
+2. Open the `configure.js` file and fill in the required information:
+   - `mongodbURI`: Your MongoDB database URI.
+   - `gmailUser`: Your Gmail email address for sending emails.
+   - `gmailPass`: Your Gmail account password.
 
-3. The server currently listens on port 6000. If you want to use a different port, change the value of the port variable in the code.
+3. Make sure to use a valid Gmail account with the correct credentials to authenticate with Nodemailer.
 
-4. Handle potential security concerns before deploying the application to production, such as input validation, authentication, and proper error handling.
-
-5. This documentation assumes basic knowledge of Node.js, Express.js, and MongoDB. If you are not familiar with these technologies, consider referring to their official documentation for better understanding.
-
-6. The user must put in the required information  in the configure.js file before proceeding with the API.
-
-## Conclusion
-
-The Email Sender API provides a simple way to send emails to multiple recipients with optional attachments. It utilizes Node.js, Express.js, Nodemailer, and MongoDB to achieve this functionality. With this API, you can easily integrate email sending capabilities into your applications.
+4. The server
