@@ -27,6 +27,7 @@ To test this API use postman:
 
 POST http://localhost:6000/send-email
 Content-Type: application/json
+```
 
 {
   "to": "recipient1@example.com,recipient2@example.com",// From your MongoDB Database automatically
@@ -34,20 +35,25 @@ Content-Type: application/json
   "text": "Hello, this is a test email.",
   "imagePath": "example-image.jpg" // Put the image file in the same directory as your .js files
 }
+```
 
 **Example Response (Success):**
 - **Status Code:** 200
 - **Response Body:**
+```
 {
   "message": "Email sent successfully"
 }
+```
 
 **Example Response (Error):**
 - **Status Code:** 500
 - **Response Body:**
+```
 {
   "error": "Failed to send email"
 }
+```
 
 ## How It Works:
 
