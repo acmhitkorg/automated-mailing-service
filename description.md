@@ -1,63 +1,88 @@
-# Email Service API Documentation
+# Email Service API using NODE JS Documentation
 
-**Description:**
+## 1. /
+**Method: GET**
+**Description:** This endpoint is used to check if the server is running.
+**Response:**
+- **Status Code:** 200
+- **Body:** Welcome to the Email Sender API!
 
-- This API allows you to manage email recipients and send emails to those recipients using a MongoDB database and a Gmail SMTP server.
+## 2. /send-email
+**Method: POST**
+**Description:** This endpoint allows users to send an email to multiple recipients with optional attachments.
 
-**Before proceeding with the API, make sure to configure the `config.py` file with your own details and links.**
+**Request:**
+- **Content-Type:** application/json
+- **Request Body Parameters:**
+  - `to` (string, required): A comma-separated list of email addresses of the recipients.
+  - `subject` (string, required): The subject of the email.
+  - `text` (string, required): The text content of the email.
+  - `imagePath` (string, optional): The relative path to an image file to be included as an attachment.
 
-**Endpoints:**
+**Response:**
+- **Status Code:** 200 if the email was sent successfully, 500 if there was an error.
 
-- **GET /:**
+**Example Request:**
+To test this API use postman:
 
-  - **Method:** GET
-  - **Summary:** Get information about the API.
-  - **Description:** Provides an overview of the API and its purpose.
+POST http://localhost:6000/send-email
+Content-Type: application/json
 
-- **GET /recipient_list:**
+{
+  "to": "recipient1@example.com,recipient2@example.com",// From your MongoDB Database automatically
+  "subject": "Greetings",
+  "text": "Hello, this is a test email.",
+  "imagePath": "Enter the image file name from the same directory in which directory your .js files have"
+}
 
-  - **Method:** GET
-  - **Summary:** Get a list of email addresses of recipients.
-  - **Description:** Retrieves a list of email addresses from the MongoDB collection.
-  - **Response:** List of email addresses, e.g., ["email1@example.com", "email2@example.com", "..."]
+**Example Response (Success):**
+- **Status Code:** 200
+- **Response Body:**
+{
+"message": "Email sent successfully"
+}
 
-- **POST /push_new_recipient:**
+**Example Response (Error):**
+- **Status Code:** 500
+- **Response Body:**
+{
+"error": "Failed to send email"
+}
 
-  - **Method:** POST
-  - **Summary:** Add a new recipient.
-  - **Description:** Adds a new recipient to the MongoDB collection.
-  - **Request:**
-    ```
-    {
-        "name": "John Doe",
-        "email": "johndoe@example.com"
-    }
-    ```
-  - **Response:**
-    ```
-    {
-        "message": "Data inserted successfully"
-    }
-    ```
+## How It Works:
 
-- **POST /send_mail:**
-  - **Method:** POST
-  - **Summary:** Send an email.
-  - **Description:** Sends an email to all recipients in the MongoDB collection.
-  - **Request:**
-    ```
-    {
-        "subject": "sample subject",
-        "body": "sample body"
-    }
-    ```
-  - **Response:**
-    ```
-    {
-        "status": "mail sent successfully"
-    }
-    ```
+1. The server starts by connecting to the MongoDB database using the provided MongoDB URI.
 
-**Note:**
+2. When a POST request is made to /send-email, the server extracts the recipient email addresses from the request body.
 
-- Before using the API, ensure that you modify the `config.py` file with your own configuration details and links. This includes setting up the MongoDB connection and providing the necessary Gmail SMTP server details to enable the email sending functionality. Failure to configure these settings correctly may result in errors or unsuccessful email delivery.
+3. It then queries the MongoDB collection named 'Your_collection_name' to retrieve all the recipient data.
+
+4. The email addresses are extracted from the email field of each recipient.
+
+5. Nodemailer is used to create an email message with the provided subject and text.
+
+6. If an imagePath is provided in the request body, the corresponding image file is attached to the email.
+
+7. The email is sent to all recipients using the Gmail account specified in the server's configuration.
+
+8. If the email is sent successfully, a success response is returned; otherwise, an error response is returned.
+
+9. The MongoDB connection is closed after the operation is complete.
+
+**Notes:**
+
+1. Ensure that the MongoDB URI provided in the code is valid and points to a database with the appropriate "Your_collection_name" collection containing recipient data.
+
+2. Make sure to use a valid Gmail account with the correct credentials to authenticate with Nodemailer.
+
+3. The server currently listens on port 6000. If you want to use a different port, change the value of the port variable in the code.
+
+4. Handle potential security concerns before deploying the application to production, such as input validation, authentication, and proper error handling.
+
+5. This documentation assumes basic knowledge of Node.js, Express.js, and MongoDB. If you are not familiar with these technologies, consider referring to their official documentation for better understanding.
+
+6. The user must put in the required information  in the configure.js file before proceeding with the API.
+
+## Conclusion
+
+The Email Sender API provides a simple way to send emails to multiple recipients with optional attachments. It utilizes Node.js, Express.js, Nodemailer, and MongoDB to achieve this functionality. With this API, you can easily integrate email sending capabilities into your applications.

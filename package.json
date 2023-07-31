@@ -1,0 +1,20 @@
+{
+  "name": "emailsender",
+  "version": "1.0.0",
+  "description": "It is an Automatic E-mail sender code using node-js.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node email_sender3.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jeet",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongodb": "^5.7.0",
+    "netlify-lambda": "^2.0.16",
+    "nodemailer": "^6.9.4",
+    "nodemon": "^3.0.1",
+    "path": "^0.12.7"
+  }
+}
